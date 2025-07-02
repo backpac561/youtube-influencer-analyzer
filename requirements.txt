@@ -1,0 +1,5 @@
+streamlit>=1.33
+pandas>=2.0
+langdetect>=1.0.9
+google-api-python-client>=2.103.0
+oauth2client==4.1.3
