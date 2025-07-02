@@ -138,15 +138,22 @@ if st.button("🔎 검색"):
         df['구독자 수 (표시용)'] = df['구독자 수'].apply(lambda x: f"{x:,}")
         df['평균 조회수 (표시용)'] = df['평균 조회수'].apply(lambda x: f"{x:,}")
 
+        # 하이퍼링크 채널명 생성
+        df['채널명 (링크)'] = df.apply(
+            lambda row: f'<a href="{row["채널 URL"]}" target="_blank">{row["채널명"]}</a>', axis=1
+        )
+
         # 보기 좋게 정렬
         df.sort_values(by="평균 조회수", ascending=False, inplace=True)
 
-        # 표시용 컬럼만 선택
-        display_df = df[[
-            "채널명", "채널 URL", "구독자 수 (표시용)", "평균 조회수 (표시용)",
-            "최근 영상 업로드일", "영상 휴면일수"
+        # HTML 테이블 출력용 컬럼 선택
+        html_df = df[[
+            "채널명 (링크)", "구독자 수 (표시용)", "평균 조회수 (표시용)", "최근 영상 업로드일", "영상 휴면일수"
         ]]
 
         # 결과 출력
-        st.success(f"🔍 총 {len(display_df)}명의 일본어 유튜버를 분석했습니다!")
-        st.dataframe(display_df, use_container_width=True)
+        st.success(f"🔍 총 {len(html_df)}명의 일본어 유튜버를 분석했습니다!")
+        st.markdown(
+            html_df.to_html(escape=False, index=False),
+            unsafe_allow_html=True
+        )
