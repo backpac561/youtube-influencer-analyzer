@@ -8,7 +8,7 @@ from langdetect import detect
 from langdetect.lang_detect_exception import LangDetectException
 
 # ▶️ API KEY 입력
-API_KEY = st.secrets["api_key"]  # Streamlit Cloud에서는 secrets로 보관
+API_KEY = st.secrets["AIzaSyCoU0ja_dZ7VToPEe40-6Cp7plukWpfvTE"]  # Streamlit Cloud에서는 secrets로 보관
 
 # ▶️ 유튜브 API 연결
 youtube = build('youtube', 'v3', developerKey=API_KEY)
